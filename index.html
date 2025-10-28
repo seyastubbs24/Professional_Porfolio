@@ -1,0 +1,426 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Leah Seya Stubblefield — Software Engineer</title>
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg:#F3F1E7;
+      --teal:#00616F;
+      --gold:#DAB968;
+      --muted:#6b6b6b;
+      --card:#fff;
+      --radius:12px;
+      --max-width:1100px;
+      --transition:0.28s cubic-bezier(.2,.9,.25,1);
+    }
+
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family:"Poppins",sans-serif;
+      background:var(--bg);
+      color:#122;
+      -webkit-font-smoothing:antialiased;
+      line-height:1.5;
+    }
+    img{max-width:100%; display:block}
+
+    /* Header */
+    .site-header{
+      position:sticky;
+      top:0;
+      z-index:100;
+      backdrop-filter:blur(6px);
+      background:rgba(243,241,231,0.97);
+      border-bottom:1px solid rgba(0,0,0,0.05);
+    }
+    .nav-inner{
+      max-width:var(--max-width);
+      margin:0 auto;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      padding:12px 20px;
+    }
+    .brand{display:flex; align-items:center; gap:12px}
+    .logo{
+      width:52px;
+      height:52px;
+      border-radius:10px;
+      background:linear-gradient(135deg,var(--teal),var(--gold));
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      color:#fff;
+      font-family:"Playfair Display",serif;
+      font-weight:700;
+      font-size:1.2rem;
+    }
+    .brand h1{margin:0; font-size:1rem; color:#063}
+    .brand p{margin:0; font-size:0.75rem; color:var(--muted)}
+
+    nav ul{
+      display:flex;
+      gap:18px;
+      list-style:none;
+      margin:0;
+      padding:0;
+    }
+    nav a{
+      padding:8px 10px;
+      border-radius:8px;
+      color:rgba(0,0,0,0.75);
+      font-weight:600;
+      text-decoration:none;
+      transition:all .2s ease;
+    }
+    nav a:hover{background:var(--gold); color:#062; transform:translateY(-2px)}
+    nav a.active{background:var(--teal); color:#fff;}
+
+    .mobile-toggle{
+      display:none;
+      background:transparent;
+      border:0;
+      cursor:pointer;
+    }
+    .hamburger span{
+      display:block;
+      height:2px;
+      width:28px;
+      background:#122;
+      margin:6px 0;
+      border-radius:2px;
+      transition:all .3s ease;
+    }
+
+    .mobile-nav{
+      display:none;
+      flex-direction:column;
+      background:var(--bg);
+      border-top:1px solid rgba(0,0,0,0.04);
+      padding:10px 20px;
+      animation:slideDown .35s ease forwards;
+    }
+    .mobile-nav.open{display:flex;}
+    @keyframes slideDown{
+      from{opacity:0; transform:translateY(-10px)}
+      to{opacity:1; transform:translateY(0)}
+    }
+    .mobile-link{
+      padding:10px 0;
+      font-weight:600;
+      color:#033;
+      text-decoration:none;
+    }
+    .mobile-link:hover{color:var(--teal);}
+
+    /* Hero */
+    .hero{
+      max-width:var(--max-width);
+      margin:18px auto;
+      padding:36px 20px;
+      display:grid;
+      grid-template-columns:1fr 380px;
+      gap:32px;
+      align-items:center;
+    }
+    .eyebrow{
+      display:inline-block;
+      font-weight:700;
+      font-size:1rem;
+      background:linear-gradient(90deg, var(--teal), var(--gold));
+      -webkit-background-clip:text;
+      -webkit-text-fill-color:transparent;
+    }
+    .title{
+      margin:10px 0;
+      font-family:"Playfair Display",serif;
+      font-size:2.2rem;
+      color:var(--teal);
+    }
+    .tagline{font-size:1.05rem; color:#233; margin-bottom:14px}
+    .lead{color:#3b3b3b; margin-bottom:18px}
+    .cta-row{display:flex; gap:12px; align-items:center; flex-wrap:wrap;}
+    .btn{
+      background:var(--teal);
+      color:#fff;
+      padding:10px 16px;
+      border-radius:10px;
+      font-weight:600;
+      text-decoration:none;
+      box-shadow:0 8px 20px rgba(0,97,111,0.08);
+      transition:transform .2s ease;
+    }
+    .btn:hover{transform:translateY(-3px)}
+    .btn-ghost{
+      background:transparent;
+      border:2px solid rgba(0,0,0,0.06);
+      color:var(--teal);
+    }
+    .btn-resume{
+      background:linear-gradient(90deg,var(--gold),#f0c86b);
+      color:#083;
+      padding:10px 14px;
+      font-weight:700;
+    }
+
+    .hero-right{
+      background:rgba(255,255,255,0.95);
+      border-radius:12px;
+      padding:16px;
+      box-shadow:0 10px 30px rgba(0,0,0,0.06);
+      text-align:center;
+    }
+    .portrait img{
+      width:100%;
+      height:300px;
+      object-fit:cover;
+      border-radius:10px;
+    }
+
+    /* Projects */
+    #projects{max-width:var(--max-width); margin:60px auto; padding:20px;}
+    .section-title{
+      font-family:"Playfair Display",serif;
+      color:var(--teal);
+      font-size:1.8rem;
+      text-align:center;
+      margin-bottom:24px;
+    }
+    .projects-grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+      gap:18px;
+    }
+    .card{
+      background:var(--card);
+      border-radius:12px;
+      box-shadow:0 8px 26px rgba(0,0,0,0.06);
+      transition:all var(--transition);
+    }
+    .card:hover{
+      transform:translateY(-10px);
+      box-shadow:0 18px 40px rgba(0,0,0,0.1);
+    }
+    .thumb img{
+      width:100%;
+      height:160px;
+      object-fit:cover;
+      border-top-left-radius:12px;
+      border-top-right-radius:12px;
+    }
+    .meta{padding:14px}
+
+    /* Skills */
+    #skills{max-width:var(--max-width); margin:60px auto; padding:20px;}
+    .skills-grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+      gap:16px;
+    }
+    .skill-card{
+      background:var(--card);
+      padding:20px;
+      border-radius:var(--radius);
+      box-shadow:0 8px 24px rgba(0,0,0,0.05);
+      text-align:center;
+      transition:all var(--transition);
+    }
+    .skill-card:hover{
+      transform:translateY(-6px);
+      box-shadow:0 12px 32px rgba(0,0,0,0.08);
+    }
+    .skill-card h3{color:var(--teal); margin-bottom:10px;}
+    .skill-card p{color:#444; font-size:.95rem;}
+
+    /* Contact */
+    #contact{max-width:var(--max-width); margin:60px auto; padding:20px;}
+    .contact-grid{
+      display:grid;
+      grid-template-columns:1fr 340px;
+      gap:22px;
+    }
+    .contact-card{
+      background:var(--card);
+      padding:18px;
+      border-radius:12px;
+      box-shadow:0 8px 26px rgba(0,0,0,0.06);
+    }
+    .socials{display:flex; gap:12px; flex-wrap:wrap}
+    .social-btn{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:8px 12px;
+      border:2px solid rgba(0,0,0,0.06);
+      border-radius:8px;
+      font-weight:600;
+      text-decoration:none;
+    }
+
+    footer{text-align:center; margin-top:60px; padding:30px; color:var(--muted);}
+
+    @media(max-width:900px){
+      .hero{grid-template-columns:1fr;}
+      .projects-grid{grid-template-columns:repeat(2,1fr);}
+    }
+    @media(max-width:640px){
+      nav ul{display:none;}
+      .mobile-toggle{display:block;}
+      .projects-grid{grid-template-columns:1fr;}
+      .contact-grid{grid-template-columns:1fr;}
+    }
+  </style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="nav-inner">
+    <div class="brand">
+      <div class="logo">LS</div>
+      <div>
+        <h1>Leah Seya Stubblefield</h1>
+        <p>Software Engineer</p>
+      </div>
+    </div>
+    <nav>
+      <ul id="navList">
+        <li><a href="#home" class="nav-link active">Home</a></li>
+        <li><a href="#about" class="nav-link">About</a></li>
+        <li><a href="#projects" class="nav-link">Projects</a></li>
+        <li><a href="#skills" class="nav-link">Skills</a></li>
+        <li><a href="#contact" class="nav-link">Contact</a></li>
+      </ul>
+    </nav>
+    <button class="mobile-toggle" id="mobileToggle" aria-label="Toggle Menu">
+      <div class="hamburger">
+        <span></span><span></span><span></span>
+      </div>
+    </button>
+  </div>
+
+  <div class="mobile-nav" id="mobileNav">
+    <a href="#home" class="mobile-link">Home</a>
+    <a href="#about" class="mobile-link">About</a>
+    <a href="#projects" class="mobile-link">Projects</a>
+    <a href="#skills" class="mobile-link">Skills</a>
+    <a href="#contact" class="mobile-link">Contact</a>
+  </div>
+</header>
+
+<section id="home" class="hero">
+  <div class="hero-left">
+    <span class="eyebrow">Software & Social Impact</span>
+    <h2 class="title">Leah Seya Stubblefield</h2>
+    <p class="tagline">I am a recent software engineering graduate with a strong academic record and entrepreneurial experience in the fashion industry. Passionate about leveraging technology to address women and youth issues and create social impact.</p>
+    <p class="lead">I combine technical problem-solving with leadership experience to build human-centered digital platforms that create meaningful opportunities.</p>
+    <div class="cta-row">
+      <a href="#projects" class="btn">View Projects</a>
+      <a href="#contact" class="btn btn-ghost">Get in touch</a>
+      <a href="Resume.pdf" class="btn btn-resume" target="_blank" download>📄 View Resume</a>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="portrait">
+      <img src="Leah.jpg" alt="Leah Seya Stubblefield">
+    </div>
+    <div class="contact-mini">
+      <p>Email: <a href="mailto:lrsstubblefield@gmail.com">lrsstubblefield@gmail.com</a></p>
+      <p>Location: Monrovia, Liberia</p>
+    </div>
+  </div>
+</section>
+
+<main>
+  <section id="projects">
+    <h2 class="section-title">Projects</h2>
+    <div class="projects-grid">
+      <article class="card">
+        <div class="thumb"><img src="NutriPal.png" alt="NutriPal App"></div>
+        <div class="meta"><h3>NutriPal App</h3></div>
+      </article>
+      <article class="card">
+        <div class="thumb"><img src="InstantGp.png" alt="Instant Go Web Application"></div>
+        <div class="meta"><h3>Instant Go Web Application</h3></div>
+      </article>
+      <article class="card">
+        <div class="thumb"><img src="Smartfarmer.png" alt="Smart Farmer Web App"></div>
+        <div class="meta"><h3>Smart Farmer Web App</h3></div>
+      </article>
+      <article class="card">
+        <div class="thumb"><img src="clockWork.png" alt="ClockWork"></div>
+        <div class="meta"><h3>ClockWork</h3></div>
+      </article>
+    </div>
+  </section>
+
+  <section id="skills">
+    <h2 class="section-title">Skills</h2>
+    <div class="skills-grid">
+      <div class="skill-card">
+        <h3>Frontend Development</h3>
+        <p>HTML, CSS, JavaScript, React, and responsive design principles.</p>
+      </div>
+      <div class="skill-card">
+        <h3>Backend & Databases</h3>
+        <p>Python, SQL, Firebase — developing scalable APIs and data models.</p>
+      </div>
+      <div class="skill-card">
+        <h3>UI/UX & Design</h3>
+        <p>Figma, wireframing, user testing, and creating intuitive digital experiences.</p>
+      </div>
+      <div class="skill-card">
+        <h3>Soft Skills</h3>
+        <p>Leadership, teamwork, communication, problem-solving, and project coordination.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact">
+    <h2 class="section-title">Contact</h2>
+    <div class="contact-grid">
+      <div class="contact-card">
+        <p>I’m available for collaboration, mentoring, and project work. Feel free to reach out or follow my work:</p>
+        <div class="socials">
+          <a class="social-btn" href="https://www.linkedin.com/in/leah-seya-stubblefield-437a70249/" target="_blank" style="border-color:#0A66C2; color:#0A66C2;">LinkedIn</a>
+          <a class="social-btn" href="https://github.com/seyastubbs24" target="_blank" style="border-color:#000; color:#000;">GitHub</a>
+          <a class="social-btn" href="mailto:lrsstubblefield@gmail.com" style="border-color:var(--gold); color:var(--gold);">Email</a>
+        </div>
+      </div>
+      <div class="contact-card">
+        <h3>Quick Details</h3>
+        <p>Location: Monrovia, Liberia</p>
+        <p>Availability: Open to opportunities</p>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <p>“Technology becomes powerful when it empowers people.”</p>
+  <p>© <span id="year"></span> Leah Seya Stubblefield</p>
+</footer>
+
+<script>
+document.getElementById('year').textContent = new Date().getFullYear();
+
+const toggle = document.getElementById('mobileToggle');
+const nav = document.getElementById('mobileNav');
+
+toggle.addEventListener('click', () => {
+  nav.classList.toggle('open');
+  const bars = toggle.querySelectorAll('.hamburger span');
+  bars[0].style.transform = nav.classList.contains('open') ? 'translateY(8px) rotate(45deg)' : '';
+  bars[1].style.opacity = nav.classList.contains('open') ? '0' : '1';
+  bars[2].style.transform = nav.classList.contains('open') ? 'translateY(-8px) rotate(-45deg)' : '';
+});
+</script>
+
+</body>
+</html>
